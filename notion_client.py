@@ -54,16 +54,6 @@ def get_upcoming_deadlines():
     return response.json().get("results", [])
 
 def parse_item(item):
-    """
-    노션 DB 속성 타입
-    - title        : item["properties"]["기업명"]["title"][0]["plain_text"]
-    - rich_text    : item["properties"]["직무"]["rich_text"][0]["plain_text"]
-    - select       : item["properties"]["산업 구분"]["select"]["name"]
-    - multi_select : item["properties"]["경력"]["select"]
-    - date         : item["properties"]["마감일"]["date"]["start"]
-    - url          : item["properties"]["링크"]["url"]
-    """
-
     props = item["properties"]
     
     def get_title(key):
@@ -104,11 +94,6 @@ def parse_item(item):
         "플랫폼": get_select("플랫폼"),
         "링크": get_url("링크"),
     }
-
-# print(f"API KEY VALUE TEST")
-# print(f"NOTION_API_KEY={NOTION_API_KEY}")
-# print(f"NOTION_DB_ID={NOTION_DEADLINE_DATABASE_ID}")
-
 
 print(f"노션 DB 조회중... (마감 D-{DAYS_BEFORE} 이내)")
 
