@@ -18,3 +18,6 @@ def main():
     print("[3/3] 디스코드 알림 전송 중...")
     send_discord(parsed_items)
     print("\n✅ 모든 작업 완료!")
+
+if __name__ == "__main__":
+    main()
