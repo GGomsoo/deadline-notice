@@ -95,14 +95,15 @@ def parse_item(item):
         "링크": get_url("링크"),
     }
 
-print(f"노션 DB 조회중... (마감 D-{DAYS_BEFORE} 이내)")
+if __name__ == "__main__":
+    print(f"노션 DB 조회중... (마감 D-{DAYS_BEFORE} 이내)")
 
-items = get_upcoming_deadlines()
-print(f"총 {len(items)}건 조회됨")
+    items = get_upcoming_deadlines()
+    print(f"총 {len(items)}건 조회됨")
 
-for item in items:
-    parsed = parse_item(item)
+    for item in items:
+        parsed = parse_item(item)
+        print("-" * 40)
+        for key, value in parsed.items():
+            print(f"{key:8} : {value}")
     print("-" * 40)
-    for key, value in parsed.items():
-        print(f"{key:8} : {value}")
-print("-" * 40)
