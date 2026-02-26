@@ -78,10 +78,13 @@ def parse_item(item):
     # 마감일까지 남은 날 계산
     deadline_str = get_date("마감일")
     if deadline_str:
-        deadline_date = datetime.fromisoformat(deadline_str).date()
+        deadline_dt = datetime.fromisoformat(deadline_str)
+        deadline_date = deadline_dt.date()
         days_left = (deadline_date - datetime.now(timezone.utc).date()).days
+        display_deadline = deadline_dt.strftime("%Y-%m-%d %H:%M")
     else:
         days_left = None
+        display_deadline = "없음"
 
     return {
         "기업명": get_title("기업명"),
@@ -89,7 +92,7 @@ def parse_item(item):
         "산업구분": get_select("산업 구분"),
         "기업형태": get_select("기업형태"),
         "경력": get_select("경력"),
-        "마감일": deadline_str or "없음",
+        "마감일": display_deadline or "없음",
         "D_day": days_left,
         "플랫폼": get_select("플랫폼"),
         "링크": get_url("링크"),
