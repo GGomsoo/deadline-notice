@@ -111,16 +111,19 @@ git clone https://github.com/본인아이디/notion-deadline-bot.git
 cd notion-deadline-bot
 
 # 가상환경 생성
-python -m venv .venv
+python -m venv venv
 
 # 가상환경 활성화 (Mac/Linux)
-source .venv/bin/activate
+source venv/bin/activate
 
 # 가상환경 활성화 (Windows)
-.venv\Scripts\Activate.ps1
+venv\Scripts\Activate.ps1
 
 # 패키지 설치
 pip install -r requirements.txt
+
+# 가상환경 비활성화
+deactivate
 ```
 
 ---
