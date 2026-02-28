@@ -1,10 +1,11 @@
 import os
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 
 load_dotenv()
 DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
+KST = timezone(timedelta(hours=9))
 
 def build_message(items: list) -> str:
     # 파싱된 NOTION 데이터를 DISCORD 메시지 문자열로 전환
@@ -13,7 +14,7 @@ def build_message(items: list) -> str:
     # > 텍스트 : 인용 블록 (들여쓰기)
     # ----- : 구분선
 
-    today_str = datetime.now().strftime("%Y년 %m월 %d일")
+    today_str = datetime.now(KST).strftime("%Y년 %m월 %d일")
     lines = [
         f"📢 **마감 임박 공고 알림** | {today_str}",
         f"━━━━━━━━━━━━━━━━━━━━━━",
