@@ -27,12 +27,12 @@ def build_message(items: list) -> str:
         # D-day 기준 색상 이모지 구분
         if d == 0:
             d_label = "🔴 **오늘 마감!**"
-        elif d == 3:
-            d_label = "🟠 **D-3**"
-        elif d == 5:
-            d_label = "🟡 **D-5**"
+        elif (d <= 3):
+            d_label = f"🟠 **D-{d}**" # D-1, D-2, D-3
+        elif (d <= 5):
+            d_label = f"🟡 **D-{d}**" # D-4, D-5
         else:
-            d_label = f"🟢 **D-{d}**"
+            d_label = f"🟢 **D-{d}**" # D-6, D-7
 
         link_line = f"\n> 🔗 {item['링크']}" if item["링크"] else ""
 
