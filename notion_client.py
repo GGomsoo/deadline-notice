@@ -9,6 +9,7 @@ load_dotenv()
 NOTION_API_KEY = os.getenv("NOTION_API_KEY")
 NOTION_DEADLINE_DATABASE_ID = os.getenv("NOTION_DEADLINE_DATABASE_ID")
 DAYS_BEFORE = int(os.getenv("DAYS_BEFORE", 7))
+KST=timezone(timedelta(hours=9)) # 한국 표준 시간 (UTC+9)
 
 # NOTION DB에서 오늘 ~ D+3 이내 마감인 항목 조회
 def get_upcoming_deadlines():
@@ -23,7 +24,7 @@ def get_upcoming_deadlines():
         "Content-Type": "application/json"
     }
 
-    today = datetime.now(timezone.utc).date()
+    today = datetime.now(KST).date()
     deadline = today + timedelta(days=DAYS_BEFORE)
 
     payload = {
@@ -80,7 +81,7 @@ def parse_item(item):
     if deadline_str:
         deadline_dt = datetime.fromisoformat(deadline_str)
         deadline_date = deadline_dt.date()
-        days_left = (deadline_date - datetime.now(timezone.utc).date()).days
+        days_left = (deadline_date - datetime.now(KST).date()).days
         display_deadline = deadline_dt.strftime("%Y-%m-%d %H:%M")
     else:
         days_left = None
