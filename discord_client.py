@@ -26,10 +26,10 @@ def build_message(items: list) -> str:
         # D-day 기준 색상 이모지 구분
         if d == 0:
             d_label = "🔴 **오늘 마감!**"
-        elif d == 1:
-            d_label = "🟠 **D-1**"
-        elif d == 2:
-            d_label = "🟡 **D-2**"
+        elif d == 3:
+            d_label = "🟠 **D-3**"
+        elif d == 5:
+            d_label = "🟡 **D-5**"
         else:
             d_label = f"🟢 **D-{d}**"
 
