@@ -8,7 +8,7 @@ load_dotenv()
 
 NOTION_API_KEY = os.getenv("NOTION_API_KEY")
 NOTION_DEADLINE_DATABASE_ID = os.getenv("NOTION_DEADLINE_DATABASE_ID")
-DAYS_BEFORE = int(os.getenv("DAYS_BEFORE", 3))
+DAYS_BEFORE = int(os.getenv("DAYS_BEFORE", 7))
 
 # NOTION DB에서 오늘 ~ D+3 이내 마감인 항목 조회
 def get_upcoming_deadlines():
