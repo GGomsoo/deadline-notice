@@ -7,6 +7,13 @@ on:
     - cron: '0 23 * * *'
   workflow_dispatch: # 수동 실행 버튼 활성화
 
+  push:
+    branches:
+      - main # main 브랜치에 push 되면 자동으로 workflow run
+    paths-ignore:
+      - 'README.md' # 문서 변경시엔 자동으로 run 되지않도록 ignore 처리
+      - '*.md'
+
 jobs:
   notify:
     runs-on: ubuntu-latest  # GitHub 서버(우분투)에서 실행
