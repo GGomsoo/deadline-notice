@@ -136,7 +136,7 @@ deactivate
 NOTION_API_KEY=secret_xxxxxxxxxxxx
 NOTION_DEADLINE_DATABASE_ID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/xxx/yyy
-DAYS_BEFORE=3
+DAYS_BEFORE=7
 ```
 
 | 변수명 | 설명 | 발급 방법 |
@@ -144,7 +144,7 @@ DAYS_BEFORE=3
 | `NOTION_API_KEY` | 노션 Integration 키 | [노션 개발자 콘솔](https://www.notion.so/my-integrations) |
 | `NOTION_DEADLINE_DATABASE_ID` | 대상 DB ID | 노션 DB URL에서 추출 |
 | `DISCORD_WEBHOOK_URL` | 디스코드 Webhook URL | 채널 설정 → 연동 |
-| `DAYS_BEFORE` | 알림 기준 D-N (기본값: 3) | 직접 설정 |
+| `DAYS_BEFORE` | 알림 기준 D-N (기본값: 7) | 직접 설정 |
 
 ---
 
@@ -183,14 +183,14 @@ GitHub 저장소 **Settings → Secrets and variables → Actions → New reposi
 | `NOTION_API_KEY` | 노션 API 키 |
 | `NOTION_DEADLINE_DATABASE_ID` | 노션 DB ID |
 | `DISCORD_WEBHOOK_URL` | 디스코드 Webhook URL |
-| `DAYS_BEFORE` | `3` |
+| `DAYS_BEFORE` | `7` |
 
 ### 2. workflow 파일 구조
 
 `.github/workflows/notify.yml` 파일이 아래 흐름으로 실행됩니다.
 
 ```
-매일 오전 9시 (KST)
+매일 오전 8시 (KST)
       ↓
 GitHub 서버 (ubuntu-latest) 실행
       ↓
