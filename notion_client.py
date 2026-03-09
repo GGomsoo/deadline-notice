@@ -10,6 +10,7 @@ NOTION_API_KEY = os.getenv("NOTION_API_KEY")
 NOTION_DEADLINE_DATABASE_ID = os.getenv("NOTION_DEADLINE_DATABASE_ID")
 DAYS_BEFORE = int(os.getenv("DAYS_BEFORE", 7))
 KST=timezone(timedelta(hours=9)) # 한국 표준 시간 (UTC+9)
+ROLLING_DEADLINE="2099-12-31" # 마감일자 불분명한 공고에 대한 옵션 (ex: "채용 시 마감")
 
 # NOTION DB에서 오늘 ~ D+3 이내 마감인 항목 조회
 def get_upcoming_deadlines():
@@ -29,14 +30,23 @@ def get_upcoming_deadlines():
 
     payload = {
         "filter": {
-            "and": [
+            # 마감일이 분명한 채용공고, 마감일이 불분명한 채용공고 모두 표시
+            "or": [
                 {
-                    "property": "마감일",
-                    "date": { "on_or_after": today.isoformat()}
+                    "and": [
+                        {
+                            "property": "마감일",
+                            "date": { "on_or_after": today.isoformat()}
+                        },
+                        {
+                            "property": "마감일",
+                            "date": { "on_or_before": deadline.isoformat()}
+                        }
+                    ]
                 },
                 {
                     "property": "마감일",
-                    "date": { "on_or_before": deadline.isoformat()}
+                    "date": {"equlas": ROLLING_DEADLINE}
                 }
             ]
         },
@@ -81,8 +91,15 @@ def parse_item(item):
     if deadline_str:
         deadline_dt = datetime.fromisoformat(deadline_str)
         deadline_date = deadline_dt.date()
-        days_left = (deadline_date - datetime.now(KST).date()).days
-        display_deadline = deadline_dt.strftime("%Y-%m-%d %H:%M")
+
+        # 마감일이 2099-12-31인 경우에 대해
+        # D-day를 숫자가 아닌 문자열로 지정, discord_client.py에서 후처리
+        if deadline_str.startswith(ROLLING_DEADLINE):
+            days_left = "채용 시 마감"
+            display_deadline = "채용 시 마감"
+        else:
+            days_left = (deadline_date - datetime.now(KST).date()).days
+            display_deadline = deadline_dt.strftime("%Y-%m-%d %H:%M")
     else:
         days_left = None
         display_deadline = "없음"
