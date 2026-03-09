@@ -9,8 +9,8 @@ load_dotenv()
 NOTION_API_KEY = os.getenv("NOTION_API_KEY")
 NOTION_DEADLINE_DATABASE_ID = os.getenv("NOTION_DEADLINE_DATABASE_ID")
 DAYS_BEFORE = int(os.getenv("DAYS_BEFORE", 7))
-KST=timezone(timedelta(hours=9)) # 한국 표준 시간 (UTC+9)
-ROLLING_DEADLINE="2099-12-31" # 마감일자 불분명한 공고에 대한 옵션 (ex: "채용 시 마감")
+KST = timezone(timedelta(hours=9)) # 한국 표준 시간 (UTC+9)
+ROLLING_DEADLINE = "2099-12-31" # 마감일자 불분명한 공고에 대한 옵션 (ex: "채용 시 마감")
 
 # NOTION DB에서 오늘 ~ D+3 이내 마감인 항목 조회
 def get_upcoming_deadlines():
@@ -46,7 +46,7 @@ def get_upcoming_deadlines():
                 },
                 {
                     "property": "마감일",
-                    "date": {"equlas": ROLLING_DEADLINE}
+                    "date": {"equals": ROLLING_DEADLINE}
                 }
             ]
         },
