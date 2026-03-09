@@ -25,7 +25,9 @@ def build_message(items: list) -> str:
         d = item["D_day"]
 
         # D-day 기준 색상 이모지 구분
-        if d == 0:
+        if d == "채용 시 마감":
+            d_label = "⚠ **채용 시 마감!**"
+        elif d == 0:
             d_label = "🔴 **오늘 마감!**"
         elif (d <= 3):
             d_label = f"🟠 **D-{d}**" # D-1, D-2, D-3
