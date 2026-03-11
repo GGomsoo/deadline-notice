@@ -41,6 +41,14 @@ def get_upcoming_deadlines():
                         {
                             "property": "마감일",
                             "date": { "on_or_before": deadline.isoformat()}
+                        },
+                        {
+                            "property": "서류",
+                            "status": "시작 전"
+                        },
+                        {
+                            "property": "서류",
+                            "status": "작성 중"
                         }
                     ]
                 },
