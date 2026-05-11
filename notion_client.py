@@ -154,7 +154,7 @@ def parse_item(item):
         "직무": get_rich_text("직무"),
         "산업구분": get_select("산업 구분"),
         "기업형태": get_select("기업형태"),
-        "지역": get_rich_text("지역"),
+        "지역": get_select("지역"),
         "경력": get_select("경력"),
         "마감일": display_deadline or "없음",
         "D_day": days_left,
