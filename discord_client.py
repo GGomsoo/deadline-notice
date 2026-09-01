@@ -36,7 +36,7 @@ def build_message(items: list) -> str:
         else:
             d_label = f"🟢 **D-{d}**" # D-6, D-7
 
-        link_line = f"\n> 🔗 {item['링크']}" if item["링크"] else ""
+        link_line = f"\n> 🔗 [채용공고 바로가기]({item['링크']})" if item["링크"] else ""
 
         block = (
             f"{d_label} | {item['마감일']}\n"
